@@ -14,7 +14,7 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/80 to-brand-red/80 z-10 mix-blend-multiply"></div>
         <div className="absolute inset-0">
           <img 
-            src="https://i.postimg.cc/KvYPrsys/Design-sem-nome-(2).png" 
+            src="https://i.postimg.cc/L6nnycQk/Design-sem-nome-(3).png" 
             alt="Gramado Landscape" 
             className="w-full h-full object-cover"
           />

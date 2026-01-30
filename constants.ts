@@ -11,56 +11,82 @@ export const COMPANY_INFO = {
 export const PARKS_DATA: Ticket[] = [
   {
     id: '1',
-    name: 'Snowland',
-    description: 'O único parque de neve de verdade no Brasil. Viva a magia da neve o ano inteiro com patinação, esqui e muita diversão para toda a família.',
-    image: 'https://picsum.photos/800/600?random=1',
-    category: 'family',
-    features: ['Neve de Verdade', 'Patinação', 'Esqui', 'Praça de Alimentação']
+    name: 'Skyglass Canela',
+    description: 'A primeira plataforma de aço e vidro da América Latina. Caminhe sobre o vale a 360 metros de altura ou ande no brinquedo Abusado para uma dose extra de adrenalina.',
+    images: [
+      'https://i.postimg.cc/YSQwbhqB/fotos-site-Parque-skayglass.jpg',
+      'https://i.postimg.cc/PqWB192D/foto-2-Parque-skayglass.webp',
+      'https://i.postimg.cc/brBMzhNH/foto-3-Parque-skayglass.webp',
+      'https://i.postimg.cc/25DtjTrz/foto-4-Parque-skayglass.webp'
+    ],
+    category: 'adventure',
+    features: ['Plataforma de Vidro', 'Abusado', 'Vista do Vale', 'Museu do Ferro']
   },
   {
     id: '2',
-    name: 'Acquamotion',
-    description: 'Parque aquático coberto e temático com águas termais. Relaxe e se divirta nas piscinas aquecidas independentemente do clima lá fora.',
-    image: 'https://picsum.photos/800/600?random=2',
+    name: 'Mini Mundo',
+    description: 'Um mundo de sonhos em miniatura. Réplicas fiéis de castelos, estações ferroviárias e marcos arquitetônicos mundiais, 24 vezes menores que o original, habitados por milhares de mini-habitantes.',
+    images: [
+      'https://i.postimg.cc/GtH7g5Jc/fotos-site-Parque-mini-mundo.jpg',
+      'https://i.postimg.cc/HnRSq96d/foto-2-Parque-mini-mundo.jpg',
+      'https://i.postimg.cc/SNY1WHxB/foto-3-Parque-mini-mundo.jpg',
+      'https://i.postimg.cc/T387QQyL/foto-4-Parque-mini-mundo.webp'
+    ],
     category: 'family',
-    features: ['Águas Termais', 'Piscinas Cobertas', 'Toboáguas', 'Gastronomia']
+    features: ['Réplicas Perfeitas', 'Ao Ar Livre', 'Cenários Fotográficos', 'Personagens Próprios']
   },
   {
     id: '3',
-    name: 'Mini Mundo',
-    description: 'Um parque ao ar livre com réplicas fiéis de prédios de várias partes do mundo, ricas em detalhes e história, 24 vezes menores que o original.',
-    image: 'https://picsum.photos/800/600?random=3',
+    name: 'Museu de Cera',
+    description: 'Fique cara a cara com seus ídolos! O Dreamland Museu de Cera traz réplicas perfeitas de celebridades, heróis e ícones mundiais em cenários imersivos para fotos incríveis.',
+    images: [
+      'https://i.postimg.cc/63QYTmPm/foto-1-Parque-Museu-de-Cera.jpg',
+      'https://i.postimg.cc/0jTfW2yB/foto-2-Parque-Museu-de-Cera.jpg',
+      'https://i.postimg.cc/xjXV4xd5/foto-3-Parque-Museu-de-Cera.jpg'
+    ],
     category: 'family',
-    features: ['Miniaturas', 'História', 'Ao Ar Livre', 'Cenários Fotográficos']
+    features: ['Celebridades', 'Cenários Temáticos', 'Fotos Divertidas', 'Dreamland']
   },
   {
     id: '4',
-    name: 'Skyglass Canela',
-    description: 'A primeira plataforma de aço e vidro da América Latina. Caminhe sobre o vale a 360 metros de altura ou ande no brinquedo Abusado.',
-    image: 'https://picsum.photos/800/600?random=4',
-    category: 'adventure',
-    features: ['Vista Panorâmica', 'Plataforma de Vidro', 'Abusado', 'Natureza']
+    name: 'Maria Fumaça',
+    description: 'Uma viagem no tempo pela cultura italiana. O passeio de trem a vapor percorre Bento Gonçalves, Garibaldi e Carlos Barbosa com música, teatro e degustação de vinhos e sucos.',
+    images: [
+      'https://i.postimg.cc/W16Bkx93/fotos-site-Parque-maria-fumaca.jpg',
+      'https://i.postimg.cc/d05gWrPz/foto-2-Parque-maria-fumaca.jpg',
+      'https://i.postimg.cc/cH62PCdR/foto-3-Parque-maria-fumaca.webp'
+    ],
+    category: 'tour',
+    features: ['Trem a Vapor', 'Degustação', 'Show Típico', 'Cultura Italiana']
   },
   {
     id: '5',
-    name: 'Vila da Mônica',
-    description: 'Encontre a turminha mais amada do Brasil em um parque temático incrível, cheio de atrações interativas para as crianças.',
-    image: 'https://picsum.photos/800/600?random=5',
-    category: 'family',
-    features: ['Personagens', 'Atrações Infantis', 'Shows', 'Temático']
+    name: 'Bondinhos Aéreos',
+    description: 'A melhor vista da Cascata do Caracol. Desfrute da natureza exuberante da serra em um passeio tranquilo e seguro com mirantes privilegiados.',
+    images: [
+      'https://i.postimg.cc/9fQnq0Rk/foto-2-Parque-Bondinhos-Aereos.jpg',
+      'https://i.postimg.cc/26q92txd/foto-3-Parque-Bondinhos-Aereos.webp',
+      'https://i.postimg.cc/05wHSLjv/foto-4-Parque-Bondinhos-Aereos.jpg'
+    ],
+    category: 'nature',
+    features: ['Cascata do Caracol', 'Natureza', 'Mirantes', 'Eagle']
   },
   {
     id: '6',
-    name: 'NBA Park',
-    description: 'O primeiro espaço temático da NBA no mundo. Imersão total no basquete com jogos, museu, restaurante e loja oficial.',
-    image: 'https://picsum.photos/800/600?random=6',
-    category: 'adventure',
-    features: ['Basquete', 'Jogos Interativos', 'Museu', 'Restaurante Oficial']
+    name: 'Vila da Mônica Gramado',
+    description: 'Um parque onde a Turma da Mônica ganha vida! Atrações divertidas para toda a família, encontros com personagens e cenários do Bairro do Limoeiro em um ambiente coberto e climatizado.',
+    images: [
+      'https://i.postimg.cc/SNXQcQ8Q/foto-site-parque-da-monica.jpg',
+      'https://i.postimg.cc/MZfKQK1f/foto-site-parque-da-monica-4.jpg',
+      'https://i.postimg.cc/k5y772rT/foto-site-parque-da-monica-3.jpg'
+    ],
+    category: 'family',
+    features: ['Turma da Mônica', 'Parque Coberto', 'Atrações Infantis', 'Shows']
   }
 ];
 
 export const HERO_CONTENT = {
   title: "A Magia da Serra Gaúcha Começa Aqui",
-  subtitle: "Sua parceira oficial Parksnet para os melhores ingressos e experiências em Gramado e Canela.",
+  subtitle: "Sua parceira oficial Parksnet para os melhores ingressos e experiências na Serra Gaúcha.",
   cta: "Ver Ingressos"
 };

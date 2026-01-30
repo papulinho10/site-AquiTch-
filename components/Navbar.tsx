@@ -103,8 +103,8 @@ const Navbar: React.FC = () => {
         )}
       </nav>
 
-      {/* Secondary Sticky Banner - Increased height and added scrolling */}
-      <div className="w-full bg-brand-red/5 overflow-hidden border-b border-brand-red/10 h-12 md:h-14 flex items-center">
+      {/* Secondary Sticky Banner - Removed border-b to eliminate white stripe effect */}
+      <div className="w-full bg-brand-red/5 overflow-hidden h-12 md:h-14 flex items-center">
         <div className="w-full inline-flex flex-nowrap overflow-hidden">
           <div className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-marquee">
              {/* Duplicate images to create seamless loop. */}

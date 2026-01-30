@@ -2,8 +2,8 @@ export interface Ticket {
   id: string;
   name: string;
   description: string;
-  image: string;
-  category: 'adventure' | 'family' | 'romantic' | 'nature';
+  images: string[];
+  category: 'adventure' | 'family' | 'romantic' | 'nature' | 'tour';
   features: string[];
 }
 

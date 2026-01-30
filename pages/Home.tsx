@@ -1,44 +1,77 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Zap, Heart, ArrowRight, PlayCircle } from 'lucide-react';
+import { ShieldCheck, Zap, Heart, ArrowRight, PlayCircle, Ticket, Clock, MessageCircle, UserCheck, AlertCircle } from 'lucide-react';
 import { HERO_CONTENT, PARKS_DATA, COMPANY_INFO } from '../constants';
 
 const Home: React.FC = () => {
   // Take first 3 parks for preview
   const featuredParks = PARKS_DATA.slice(0, 3);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Setup Intersection Observer to play video when visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Video is visible, try to play
+            videoRef.current?.play().catch((e) => {
+              console.log('Autoplay prevented by browser policy:', e);
+            });
+          } else {
+            // Video is out of view, pause
+            videoRef.current?.pause();
+          }
+        });
+      },
+      { threshold: 0.4 } // Trigger when 40% of the video is visible
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-brand-cream font-sans">
       {/* Hero Section */}
-      <section className="relative h-[650px] flex items-center justify-center text-center text-white overflow-hidden">
+      {/* Adjusted height for mobile to minimize cropping of the landscape image */}
+      <section className="relative h-[60vh] md:h-[650px] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/80 to-brand-red/80 z-10 mix-blend-multiply"></div>
         <div className="absolute inset-0">
           <img 
-            src="https://i.postimg.cc/L6nnycQk/Design-sem-nome-(3).png" 
+            src="https://i.postimg.cc/KvYPrsys/Design-sem-nome-(2).png" 
             alt="Gramado Landscape" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center" 
           />
         </div>
         <div className="relative z-20 max-w-5xl px-4 mx-auto space-y-8 animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
+          <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
             {HERO_CONTENT.title}
           </h1>
-          <p className="text-xl md:text-3xl font-medium mb-8 drop-shadow-lg text-white/95 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base md:text-3xl font-medium mb-8 drop-shadow-lg text-white/95 max-w-3xl mx-auto leading-relaxed">
             {HERO_CONTENT.subtitle}
           </p>
           <Link
             to="/ingressos"
-            className="inline-flex items-center px-10 py-5 text-xl font-bold text-brand-red bg-white rounded-full hover:bg-brand-gold hover:text-brand-dark transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-brand-gold/50"
+            className="inline-flex items-center px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-bold text-brand-red bg-white rounded-full hover:bg-brand-gold hover:text-brand-dark transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-brand-gold/50"
           >
             {HERO_CONTENT.cta}
-            <ArrowRight className="ml-3" size={28} />
+            <ArrowRight className="ml-3" size={24} />
           </Link>
         </div>
       </section>
 
-      {/* Trust Indicators */}
-      <section className="py-16 bg-white relative z-10 -mt-10 rounded-t-[3rem] shadow-lg mx-2 md:mx-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Trust Indicators & Parksnet Banner Unified Section */}
+      {/* Removed mx-2 md:mx-10 to allow full width. Removed pb-6 to remove white bar below banner. */}
+      <section className="pt-16 bg-white relative z-10 -mt-10 rounded-t-[3rem] shadow-lg overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="p-8 hover:bg-blue-50 rounded-2xl transition-colors duration-300 group">
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
@@ -63,19 +96,18 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Parksnet Banner - Infinite Scroll Clean (No Background/Frame) */}
-      <section className="bg-white py-2 overflow-hidden">
+        {/* Parksnet Banner - Integrated directly here to share the white background card */}
+        {/* Removed opacity-80 and ensured full width display */}
         <div className="w-full inline-flex flex-nowrap overflow-hidden">
-          <div className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-marquee">
-             {/* Duplicate images to create seamless loop. Image is wide so 2 or 3 is enough */}
-             {[...Array(4)].map((_, i) => (
+          <div className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-marquee whitespace-nowrap min-w-full">
+             {[...Array(12)].map((_, i) => (
                 <img 
                   key={i}
                   src="https://i.postimg.cc/FFZNvYcc/banner-para-site-Parksnet.png" 
                   alt="Parksnet Partner Banner" 
-                  className="h-24 md:h-28 w-auto object-cover"
+                  className="h-20 md:h-24 w-auto object-contain flex-shrink-0"
+                  loading="eager"
                 />
              ))}
           </div>
@@ -90,12 +122,18 @@ const Home: React.FC = () => {
             {/* Left: Video (Compact & Tall) */}
             <div className="w-full lg:w-4/12 flex justify-center lg:justify-start">
               <div className="relative rounded-2xl overflow-hidden shadow-xl bg-gray-100 w-full max-w-[320px] lg:max-w-full aspect-[9/16] border border-gray-200 z-10">
-                <iframe 
-                  src="https://drive.google.com/file/d/1k4kStrSs_uEE6OVH61AI6gJLXQuPjopw/preview?autoplay=1" 
-                  className="w-full h-full"
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  title="Vídeo Institucional AquiTchê"
-                ></iframe>
+                {/* Updated Video Link - HTML5 Video Tag for direct MP4 */}
+                <video 
+                  ref={videoRef}
+                  className="w-full h-full object-cover"
+                  muted
+                  loop
+                  playsInline
+                  controls
+                >
+                  <source src="https://files.catbox.moe/qw1zpc.mp4" type="video/mp4" />
+                  Seu navegador não suporta o elemento de vídeo.
+                </video>
               </div>
             </div>
 
@@ -115,7 +153,7 @@ const Home: React.FC = () => {
                   Aqui no sul, a hospitalidade é nossa tradição. Somos gaúchos de coração e conhecemos cada detalhe que faz da Serra Gaúcha um lugar mágico.
                 </p>
                 <p>
-                  Criamos roteiros personalizados para que você vivencie o melhor de Gramado, Canela e Bento Gonçalves. Dos vinhedos renomados ao charme das ruas floridas, nossa missão é transformar sua viagem em memórias eternas.
+                  Criamos roteiros personalizados para que você vivencie o melhor da Serra Gaúcha. Dos vinhedos renomados ao charme das ruas floridas, nossa missão é transformar sua viagem em memórias eternas.
                 </p>
                 <p className="text-gray-800 font-semibold border-l-4 border-brand-red pl-6 py-1">
                   "Mais do que vender ingressos, guiamos você por experiências autênticas, sabores inesquecíveis e paisagens de tirar o fôlego, com o conforto e o carinho que você merece."
@@ -139,8 +177,99 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Parks Preview */}
+      {/* WHY CHOOSE US / ESSENCE SECTION */}
       <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Header */}
+          <div className="text-center mb-16 space-y-4">
+             <span className="inline-block px-4 py-2 rounded-full border border-brand-red/30 bg-red-50 text-brand-red text-sm font-bold tracking-wider uppercase">
+                <UserCheck className="inline-block w-4 h-4 mr-2 mb-0.5" />
+                Nossa Essência
+             </span>
+             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+                Por que escolher a <span className="text-brand-red">AquiTchê?</span>
+             </h2>
+             <div className="max-w-3xl mx-auto mt-6">
+               <p className="text-xl text-gray-600 font-medium">
+                 Na AquiTchê, transformamos sonhos em realidade.
+               </p>
+               <p className="mt-4 text-gray-500 leading-relaxed">
+                 Somos especialistas em criar experiências únicas e memoráveis na Serra Gaúcha, 
+                 conectando você aos melhores destinos e atrações da região com o carinho e a dedicação que você merece.
+               </p>
+             </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            
+            {/* Card 1 */}
+            <div className="bg-gray-50 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+              <div className="w-16 h-16 bg-brand-gold rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <ShieldCheck className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Excelência em Atendimento</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Nossa equipe especializada oferece suporte personalizado desde o primeiro contato até o final da sua viagem.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-gray-50 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+              <div className="w-16 h-16 bg-brand-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Ticket className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Ingressos com Desconto</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Parcerias exclusivas com as principais atrações nos permitem oferecer os melhores preços.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-gray-50 p-8 rounded-3xl hover:shadow-xl transition-all duration-300 border border-gray-100 group">
+              <div className="w-16 h-16 bg-brand-red rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Clock className="text-white" size={32} />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Disponibilidade Total</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Atendimento ágil via WhatsApp e flexibilidade para atender suas necessidades específicas.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Contact Box (Standard Blue Alert Design - Matching Tickets Page Style) */}
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-8 rounded-r-lg shadow-sm flex flex-col md:flex-row items-start gap-6">
+             <div className="flex-shrink-0">
+                <AlertCircle size={48} className="text-blue-500" />
+             </div>
+             
+             <div className="flex-1">
+               <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                 Não encontrou o <span className="text-blue-600">ingresso</span> que procurava?
+               </h3>
+               <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+                 Não se preocupe! Nós temos parceria com <strong>todos os parques da Serra Gaúcha</strong>. 
+                 Se a atração que você deseja não está listada em nosso site, nossa equipe encontra a melhor opção para você.
+               </p>
+               <a 
+                  href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Olá, estou procurando um ingresso específico e preciso de ajuda!`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-colors"
+               >
+                 <MessageCircle className="mr-2" size={20} />
+                 Falar com Consultor
+               </a>
+             </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Featured Parks Preview */}
+      <section className="py-20 bg-brand-cream/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6">Destaques da Serra</h2>
@@ -149,17 +278,16 @@ const Home: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {featuredParks.map((park) => (
-              <div key={park.id} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
-                <div className="h-64 overflow-hidden relative">
-                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10" />
-                  <img src={park.image} alt={park.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+              <div key={park.id} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
+                <div className="relative w-full overflow-hidden border-b border-gray-100">
+                  <img src={park.images[0]} alt={park.name} className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
                 </div>
-                <div className="p-8">
+                <div className="p-8 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition-colors">{park.name}</h3>
-                  <p className="text-gray-600 mb-6 line-clamp-3 text-base">{park.description}</p>
+                  <p className="text-gray-600 mb-6 line-clamp-3 text-base flex-grow">{park.description}</p>
                   <Link 
                     to="/ingressos" 
-                    className="flex w-full items-center justify-center py-4 border-2 border-brand-red text-brand-red font-bold rounded-xl hover:bg-brand-red hover:text-white transition-all uppercase tracking-wide text-sm"
+                    className="flex w-full items-center justify-center py-4 border-2 border-brand-red text-brand-red font-bold rounded-xl hover:bg-brand-red hover:text-white transition-all uppercase tracking-wide text-sm mt-auto"
                   >
                     Garanta seu Lugar
                   </Link>
@@ -186,7 +314,7 @@ const Home: React.FC = () => {
           <h2 className="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">Suas férias merecem ser perfeitas!</h2>
           <p className="text-2xl mb-10 opacity-90 font-medium">Não deixe para a última hora. Fale com nossa equipe especializada e monte o roteiro dos seus sonhos.</p>
           <a 
-             href={`https://wa.me/5554996413434?text=Olá, gostaria de ajuda para planejar meu roteiro em Gramado!`}
+             href={`https://wa.me/5554996413434?text=Olá, gostaria de ajuda para planejar meu roteiro na Serra Gaúcha!`}
              target="_blank"
              rel="noopener noreferrer"
              className="inline-block px-12 py-5 bg-brand-gold text-brand-dark text-xl font-bold rounded-full hover:bg-white hover:text-brand-red transition-all shadow-xl transform hover:scale-105"

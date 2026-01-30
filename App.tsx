@@ -3,12 +3,14 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Tickets from './pages/Tickets';
 
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <div className="font-sans antialiased text-gray-900 bg-white">
         <Navbar />
         

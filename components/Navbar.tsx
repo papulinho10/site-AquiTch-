@@ -15,9 +15,9 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="sticky top-0 z-40 shadow-lg bg-white">
-      {/* Main Navigation - Reduced height from h-24 to h-20 */}
-      <nav className="bg-white text-brand-dark border-b border-brand-red/10 relative z-50">
+    <div className="sticky top-0 z-40 shadow-lg bg-white/90 backdrop-blur-md border-b-4 border-brand-gold">
+      {/* Main Navigation - Reduced height from h-20 to h-20 */}
+      <nav className="bg-transparent text-brand-dark relative z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             
@@ -37,10 +37,10 @@ const Navbar: React.FC = () => {
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`px-4 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-200 ${
+                    className={`px-6 py-2.5 rounded-full text-sm font-extrabold tracking-widest uppercase transition-all duration-300 ${
                       isActive(link.path)
-                        ? 'text-white bg-brand-red shadow-md transform -translate-y-0.5'
-                        : 'text-gray-600 hover:text-brand-red hover:bg-red-50'
+                        ? 'text-brand-dark bg-brand-gold shadow-[0_4px_14px_0_rgba(255,184,0,0.39)] transform -translate-y-1'
+                        : 'text-gray-700 hover:text-brand-red hover:bg-red-50 hover:-translate-y-0.5'
                     }`}
                   >
                     {link.label}

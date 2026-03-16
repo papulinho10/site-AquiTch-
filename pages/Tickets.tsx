@@ -18,7 +18,7 @@ const ParkCard: React.FC<{ park: Ticket }> = ({ park }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+    <div className="bg-white/90 backdrop-blur-md rounded-2xl shadow-md overflow-hidden flex flex-col h-full hover:shadow-xl transition-shadow duration-300 border border-white/50 group">
       {/* Image Carousel - Height adapts to image (h-auto) */}
       <div className="relative w-full overflow-hidden bg-gray-50">
         <img 
@@ -80,7 +80,7 @@ const ParkCard: React.FC<{ park: Ticket }> = ({ park }) => {
           href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Olá, gostaria de comprar ingressos para o *${park.name}*!`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full block text-center bg-brand-red text-white font-bold py-3 px-4 rounded-xl hover:bg-red-800 transition-colors shadow-md active:scale-95 transform duration-150 mt-auto"
+          className="w-full block text-center bg-brand-green text-white font-extrabold py-4 px-4 rounded-xl hover:bg-green-600 transition-all shadow-[0_4px_14px_0_rgba(0,208,132,0.39)] hover:shadow-[0_6px_20px_rgba(0,208,132,0.23)] hover:-translate-y-1 active:scale-95 transform duration-200 mt-auto uppercase tracking-wider text-sm"
         >
           Comprar Agora
         </a>
@@ -91,14 +91,24 @@ const ParkCard: React.FC<{ park: Ticket }> = ({ park }) => {
 
 const Tickets: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 pt-10 pb-20">
+    <div className="min-h-screen bg-transparent pt-10 pb-20">
       
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Ingressos para Parques</h1>
-        <p className="text-xl text-gray-600 max-w-3xl">
-          Explore as melhores atrações da Serra Gaúcha. Navegue pelas fotos, escolha sua aventura e garanta sua diversão com a segurança da AquiTchê Turismo.
-        </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="bg-gradient-to-br from-brand-red to-brand-wine p-10 md:p-16 rounded-[2.5rem] shadow-2xl relative overflow-hidden text-center">
+          <div className="absolute inset-0 bg-[url('https://picsum.photos/1920/1080?random=30')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+          <div className="relative z-10">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-bold tracking-widest uppercase mb-4 backdrop-blur-md border border-white/30">
+              Aventuras Inesquecíveis
+            </span>
+            <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 drop-shadow-lg tracking-tight">
+              Ingressos para <span className="text-brand-gold">Parques</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto font-medium leading-relaxed">
+              Explore as melhores atrações da Serra Gaúcha. Navegue pelas fotos, escolha sua aventura e garanta sua diversão com a segurança da AquiTchê Turismo.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Grid */}
@@ -110,26 +120,29 @@ const Tickets: React.FC = () => {
         </div>
       </div>
 
-      {/* Mandatory Warning Section */}
-      <div className="max-w-4xl mx-auto px-4 mt-20">
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-8 rounded-r-lg shadow-sm flex flex-col sm:flex-row items-start gap-6">
-          <div className="flex-shrink-0">
-             <AlertCircle size={48} className="text-blue-500" />
+      {/* Mandatory Warning Section - Dopamine Boosted */}
+      <div className="max-w-5xl mx-auto px-4 mt-24">
+        <div className="bg-gradient-to-r from-brand-blue to-blue-600 p-10 rounded-3xl shadow-2xl flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('https://picsum.photos/1920/1080?random=40')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+          
+          <div className="flex-shrink-0 relative z-10 bg-white/20 p-6 rounded-full backdrop-blur-md border border-white/30 animate-pulse">
+             <AlertCircle size={64} className="text-white" />
           </div>
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Não encontrou o parque que procurava?</h3>
-            <p className="text-gray-700 text-lg mb-6">
-              Não se preocupe! Nós temos parceria com <strong>todos os parques da Serra Gaúcha</strong> (como Snowland, Acquamotion, Vila da Mônica, NBA Park, entre outros). 
-              Se a atração que você deseja não está listada acima, entre em contato conosco agora mesmo.
+          
+          <div className="relative z-10 text-center md:text-left">
+            <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4 drop-shadow-md">Não encontrou o parque que procurava?</h3>
+            <p className="text-white/90 text-xl mb-8 font-medium leading-relaxed">
+              Temos parceria com <strong className="text-brand-gold text-2xl">TODOS</strong> os parques da Serra Gaúcha (Snowland, Acquamotion, Vila da Mônica, NBA Park e muito mais!). 
+              Se a atração que você deseja não está listada, fale conosco agora!
             </p>
             <a 
                href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Olá, estou procurando um parque que não achei no site, pode me ajudar?`}
                target="_blank"
                rel="noopener noreferrer"
-               className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-colors"
+               className="inline-flex items-center px-8 py-4 text-lg font-extrabold rounded-full text-brand-blue bg-white hover:bg-brand-gold hover:text-brand-dark shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:shadow-[0_0_30px_rgba(255,184,0,0.6)] transition-all transform hover:scale-105"
             >
-              <MessageCircle className="mr-2" size={20} />
-              Falar com Consultor
+              <MessageCircle className="mr-3" size={24} />
+              Falar com Consultor Agora
             </a>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Zap, Heart, ArrowRight, PlayCircle, Ticket, Clock, MessageCircle, UserCheck, AlertCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { HERO_CONTENT, PARKS_DATA, COMPANY_INFO } from '../constants';
 
 const Home: React.FC = () => {
@@ -39,10 +40,10 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-brand-cream font-sans">
+    <div className="flex flex-col min-h-screen bg-transparent font-sans">
       {/* Hero Section */}
       {/* Adjusted height for mobile to minimize cropping of the landscape image */}
-      <section className="relative h-[60vh] md:h-[650px] flex items-center justify-center text-center text-white overflow-hidden">
+      <section className="relative min-h-[70vh] md:min-h-[650px] flex items-center justify-center text-center text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/80 to-brand-red/80 z-10 mix-blend-multiply"></div>
         <div className="absolute inset-0">
           <img 
@@ -51,16 +52,16 @@ const Home: React.FC = () => {
             className="w-full h-full object-cover object-center" 
           />
         </div>
-        <div className="relative z-20 max-w-5xl px-4 mx-auto space-y-8 animate-fade-in-up">
-          <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-2xl">
+        <div className="relative z-20 max-w-5xl px-4 mx-auto space-y-6 md:space-y-8 animate-fade-in-up pb-12 md:pb-24">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 drop-shadow-2xl leading-tight">
             {HERO_CONTENT.title}
           </h1>
-          <p className="text-base md:text-3xl font-medium mb-8 drop-shadow-lg text-white/95 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-3xl font-medium mb-8 drop-shadow-lg text-white/95 max-w-3xl mx-auto leading-relaxed">
             {HERO_CONTENT.subtitle}
           </p>
           <Link
             to="/ingressos"
-            className="inline-flex items-center px-8 py-4 md:px-10 md:py-5 text-lg md:text-xl font-bold text-brand-red bg-white rounded-full hover:bg-brand-gold hover:text-brand-dark transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-brand-gold/50"
+            className="inline-flex items-center px-8 py-4 md:px-10 md:py-5 text-base sm:text-lg md:text-xl font-bold text-brand-red bg-white rounded-full hover:bg-brand-gold hover:text-brand-dark transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-brand-gold/50"
           >
             {HERO_CONTENT.cta}
             <ArrowRight className="ml-3" size={24} />
@@ -70,10 +71,10 @@ const Home: React.FC = () => {
 
       {/* Trust Indicators & Parksnet Banner Unified Section */}
       {/* Removed mx-2 md:mx-10 to allow full width. Removed pb-6 to remove white bar below banner. */}
-      <section className="pt-16 bg-white relative z-10 -mt-10 rounded-t-[3rem] shadow-lg overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="p-8 hover:bg-blue-50 rounded-2xl transition-colors duration-300 group">
+      <section className="pt-10 md:pt-16 bg-white relative z-30 -mt-8 md:-mt-16 rounded-t-[2rem] md:rounded-t-[3rem] shadow-[0_-10px_30px_rgba(0,0,0,0.2)] md:shadow-[0_-20px_50px_rgba(0,0,0,0.3)] border-t border-white/50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 md:mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-center">
+            <div className="p-6 md:p-8 hover:bg-blue-50 rounded-2xl transition-colors duration-300 group">
               <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                 <ShieldCheck className="text-brand-blue" size={40} />
               </div>
@@ -97,25 +98,61 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* Parksnet Banner - Integrated directly here to share the white background card */}
-        {/* Removed opacity-80 and ensured full width display */}
-        <div className="w-full inline-flex flex-nowrap overflow-hidden">
-          <div className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-marquee whitespace-nowrap min-w-full">
-             {[...Array(12)].map((_, i) => (
-                <img 
-                  key={i}
-                  src="https://i.postimg.cc/FFZNvYcc/banner-para-site-Parksnet.png" 
-                  alt="Parksnet Partner Banner" 
-                  className="h-20 md:h-24 w-auto object-contain flex-shrink-0"
-                  loading="eager"
-                />
-             ))}
+      {/* Parksnet Banner - Integrated directly here to share the white background card */}
+      {/* Removed opacity-80 and ensured full width display */}
+      <div className="w-full inline-flex flex-nowrap overflow-hidden">
+        <div className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-marquee whitespace-nowrap min-w-full">
+           {[...Array(12)].map((_, i) => (
+              <img 
+                key={i}
+                src="https://i.postimg.cc/FFZNvYcc/banner-para-site-Parksnet.png" 
+                alt="Parksnet Partner Banner" 
+                className="h-20 md:h-24 w-auto object-contain flex-shrink-0"
+                loading="eager"
+              />
+           ))}
+        </div>
+      </div>
+    </section>
+
+      {/* Featured Parks Preview - Moved up */}
+      <section className="py-20 bg-brand-cream/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6">Destaques da Serra</h2>
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto">Selecionamos as experiências mais incríveis para você. Escolha seu destino e prepare-se para a diversão.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {featuredParks.map((park) => (
+              <div key={park.id} className="group bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/50 flex flex-col h-full">
+                <div className="relative w-full overflow-hidden border-b border-gray-100">
+                  <img src={park.images[0]} alt={park.name} className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
+                </div>
+                <div className="p-8 flex flex-col flex-grow">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition-colors">{park.name}</h3>
+                  <p className="text-gray-600 mb-6 line-clamp-3 text-base flex-grow">{park.description}</p>
+                  <Link 
+                    to="/ingressos" 
+                    className="flex w-full items-center justify-center py-4 border-2 border-brand-red text-brand-red font-bold rounded-xl hover:bg-brand-red hover:text-white transition-all uppercase tracking-wide text-sm mt-auto"
+                  >
+                    Garanta seu Lugar
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link to="/ingressos" className="inline-flex items-center text-lg font-bold text-brand-red hover:text-red-700 transition-colors underline decoration-2 underline-offset-4">
+              Ver todas as atrações disponíveis <ArrowRight className="ml-2" size={24} />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Video & Persuasion Section - Standard Light Style */}
-      <section className="py-24 bg-brand-cream text-brand-dark overflow-hidden">
+      <section className="py-24 bg-brand-cream/80 backdrop-blur-md text-brand-dark overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             
@@ -177,8 +214,66 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* New CTA Section - Dopamine Boosted */}
+      <section className="py-20 bg-gradient-to-r from-brand-red via-red-500 to-brand-wine relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30 bg-[url('https://i.postimg.cc/KvYPrsys/Design-sem-nome-(2).png')] bg-cover bg-center mix-blend-overlay animate-pulse-fast"></div>
+        
+        {/* Floating background elements for CTA */}
+        <motion.div 
+          className="absolute top-10 left-10 text-white/20 text-6xl"
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        >
+          ✨
+        </motion.div>
+        <motion.div 
+          className="absolute bottom-10 right-10 text-brand-gold/40 text-8xl"
+          animate={{ y: [0, -20, 0], rotate: [-10, 10, -10] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          🎟️
+        </motion.div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <span className="inline-block px-6 py-2 rounded-full bg-white/20 text-white text-sm font-bold tracking-widest uppercase mb-6 backdrop-blur-sm border border-white/30 animate-pulse">
+            Oferta por Tempo Limitado
+          </span>
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-white drop-shadow-xl">
+            Pronto para viver a magia da <span className="text-brand-gold">Serra Gaúcha?</span>
+          </h2>
+          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-white/95 drop-shadow-md font-medium">
+            Descubra parques incríveis, museus fascinantes e experiências gastronômicas inesquecíveis. Não deixe para depois!
+          </p>
+          
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+            <Link 
+              to="/ingressos" 
+              className="group relative inline-flex items-center justify-center px-8 py-4 bg-yellow-400 text-brand-dark font-extrabold rounded-full hover:bg-yellow-500 transition-all transform hover:scale-105 text-base overflow-hidden"
+            >
+              <Ticket className="mr-3 group-hover:rotate-12 transition-transform" size={28} />
+              <span className="relative">Explorar Todos os Ingressos</span>
+            </Link>
+            
+            <a 
+              href={`https://wa.me/${COMPANY_INFO.whatsapp}?text=Olá, quero aproveitar as ofertas para a Serra Gaúcha!`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-8 py-5 bg-white/10 backdrop-blur-md border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-brand-red transition-all transform hover:scale-105 shadow-xl text-lg"
+            >
+              <MessageCircle className="mr-3" size={24} />
+              Chamar no WhatsApp
+            </a>
+          </div>
+          
+          <p className="mt-8 text-white/80 text-sm font-medium flex items-center justify-center">
+            <ShieldCheck size={16} className="mr-2 text-brand-green" />
+            Compra 100% segura e garantida pela Parksnet
+          </p>
+        </div>
+      </section>
+
       {/* WHY CHOOSE US / ESSENCE SECTION */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Header */}
@@ -268,44 +363,8 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Featured Parks Preview */}
-      <section className="py-20 bg-brand-cream/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-6">Destaques da Serra</h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto">Selecionamos as experiências mais incríveis para você. Escolha seu destino e prepare-se para a diversão.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {featuredParks.map((park) => (
-              <div key={park.id} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
-                <div className="relative w-full overflow-hidden border-b border-gray-100">
-                  <img src={park.images[0]} alt={park.name} className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700" />
-                </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition-colors">{park.name}</h3>
-                  <p className="text-gray-600 mb-6 line-clamp-3 text-base flex-grow">{park.description}</p>
-                  <Link 
-                    to="/ingressos" 
-                    className="flex w-full items-center justify-center py-4 border-2 border-brand-red text-brand-red font-bold rounded-xl hover:bg-brand-red hover:text-white transition-all uppercase tracking-wide text-sm mt-auto"
-                  >
-                    Garanta seu Lugar
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Link to="/ingressos" className="inline-flex items-center text-lg font-bold text-brand-red hover:text-red-700 transition-colors underline decoration-2 underline-offset-4">
-              Ver todas as atrações disponíveis <ArrowRight className="ml-2" size={24} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Bottom */}
-      <section className="py-24 bg-brand-blue relative overflow-hidden">
+      <section className="py-24 bg-brand-blue/95 backdrop-blur-md relative overflow-hidden">
         {/* Decorative Circles */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full mix-blend-overlay filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-gold/20 rounded-full mix-blend-overlay filter blur-3xl translate-x-1/2 translate-y-1/2"></div>

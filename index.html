@@ -15,22 +15,29 @@
             },
             colors: {
               brand: {
-                red: '#FF3B30',      /* Brighter, more cheerful red */
-                dark: '#2d3436',     /* Softer dark gray, less harsh */
-                gold: '#FFD700',
-                green: '#00C853',    /* Vibrant green */
-                blue: '#00A8E8',     /* New cheerful blue */
-                cream: '#FFF9F0'     /* Warm background */
+                red: '#FF2A4D',      /* Super vibrant red/pinkish for urgency/dopamine */
+                wine: '#800020',     /* Deep Burgundy/Wine for Serra Gaúcha theme */
+                dark: '#1A1A24',     /* Rich dark */
+                gold: '#FFB800',     /* Pure glowing gold */
+                green: '#00D084',    /* Minty vibrant success green */
+                blue: '#00E5FF',     /* Electric blue */
+                cream: '#FFF8F0'     /* Warm cozy cream */
               }
             },
             animation: {
               marquee: 'marquee 20s linear infinite',
               'bounce-slow': 'bounce 3s infinite',
+              'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'float': 'float 6s ease-in-out infinite',
             },
             keyframes: {
               marquee: {
                 '0%': { transform: 'translateX(0%)' },
                 '100%': { transform: 'translateX(-50%)' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
               }
             }
           }
@@ -57,13 +64,16 @@
     "react": "https://esm.sh/react@^19.2.4",
     "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
     "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "framer-motion": "https://esm.sh/framer-motion@11.11.11"
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
   <body>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
-  </body>
+  <script type="module" src="/index.tsx"></script>
+</body>
 </html>

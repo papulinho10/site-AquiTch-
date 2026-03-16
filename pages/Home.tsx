@@ -100,14 +100,14 @@ const Home: React.FC = () => {
 
       {/* Parksnet Banner - Integrated directly here to share the white background card */}
       {/* Removed opacity-80 and ensured full width display */}
-      <div className="w-full inline-flex flex-nowrap overflow-hidden">
+      <div className="w-full flex flex-nowrap overflow-hidden leading-none">
         <div className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-marquee whitespace-nowrap min-w-full">
            {[...Array(12)].map((_, i) => (
               <img 
                 key={i}
                 src="https://i.postimg.cc/FFZNvYcc/banner-para-site-Parksnet.png" 
                 alt="Parksnet Partner Banner" 
-                className="h-20 md:h-24 w-auto object-contain flex-shrink-0"
+                className="h-16 md:h-20 w-auto object-cover object-top flex-shrink-0 block mix-blend-multiply"
                 loading="eager"
               />
            ))}

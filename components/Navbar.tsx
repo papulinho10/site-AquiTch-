@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="sticky top-0 z-40 shadow-lg bg-white/90 backdrop-blur-md border-b-4 border-brand-gold">
+    <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md">
       {/* Main Navigation - Reduced height from h-20 to h-20 */}
       <nav className="bg-transparent text-brand-dark relative z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
